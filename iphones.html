@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iPhones - Bazzar Collections</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="cart.css">
+    <link rel="stylesheet" href="search.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-text">Bazzar_Collection</div>
+                <div class="logo-dot"></div>
+            </a>
+
+            <div class="hamburger">
+                <div class="hamburger-lines">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+
+            <div class="nav-icons">
+                <div class="location">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>ZA</span>
+                </div>
+                <div class="search-icon">
+                    <i class="fas fa-search"></i>
+                </div>
+                <div class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Modal -->
+    <div id="search-modal" class="modal">
+        <div class="modal-content search-modal-content">
+            <div class="modal-header">
+                <div class="search-input-container">
+                    <i class="fas fa-search search-icon-input"></i>
+                    <input type="text" id="search-input" placeholder="Search for products..." autofocus>
+                </div>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="search-results">
+                    <div class="search-message">Type at least 2 characters to search</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div id="cart-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Shopping Cart</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="cart-items">
+                    <!-- Cart items will be dynamically added here -->
+                </div>
+                <div class="cart-summary">
+                    <div class="summary-item">
+                        <span>Total</span>
+                        <span class="total-amount">R0.00</span>
+                    </div>
+                    <button class="cyber-btn view-cart-btn" onclick="window.location.href='cart.html'">
+                        <span class="btn-content">View Cart</span>
+                    </button>
+                    <button class="cyber-btn checkout-btn" onclick="window.location.href='checkout.html'">
+                        <span class="btn-content">Checkout</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <template id="cart-item-template">
+        <div class="cart-item">
+            <div class="item-image">
+                <img src="" alt="">
+            </div>
+            <div class="item-details">
+                <h3 class="item-name"></h3>
+                <div class="item-variant">
+                    <span class="storage"></span>
+                </div>
+                <div class="item-price"></div>
+            </div>
+            <div class="item-quantity">
+                <button class="quantity-btn decrease">-</button>
+                <input type="number" value="1" min="1" max="99">
+                <button class="quantity-btn increase">+</button>
+            </div>
+            <div class="item-total"></div>
+            <button class="remove-item">
+                <i class="fas fa-trash"></i>
+            </button>
+        </div>
+    </template>
+
+    <div class="menu-overlay">
+        <div class="menu-content">
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">
+                    <span class="link-icon"><i class="fas fa-home"></i></span>
+                    <span class="link-text">Home</span>
+                </a></li>
+                <li><a href="sneakers.html" class="nav-link">
+                    <span class="link-icon"><i class="fas fa-shoe-prints"></i></span>
+                    <span class="link-text">Sneakers</span>
+                </a></li>
+                <li><a href="iphones.html" class="nav-link active">
+                    <span class="link-icon"><i class="fas fa-mobile-alt"></i></span>
+                    <span class="link-text">iPhones</span>
+                </a></li>
+                <li><a href="#contact" class="nav-link">
+                    <span class="link-icon"><i class="fas fa-envelope"></i></span>
+                    <span class="link-text">Contact</span>
+                </a></li>
+            </ul>
+        </div>
+    </div>
+
+    <main class="iphones-page">
+        <section class="series-navigation">
+            <h2 class="cyber-text">iPhone Series</h2>
+            <div class="series-tabs">
+                <button class="series-btn active" data-series="iphone15">
+                    <i class="fas fa-mobile-alt"></i>iPhone 15 Series
+                </button>
+                <button class="series-btn" data-series="iphone14">
+                    <i class="fas fa-mobile-alt"></i>iPhone 14 Series
+                </button>
+                <button class="series-btn" data-series="iphone13">
+                    <i class="fas fa-mobile-alt"></i>iPhone 13 Series
+                </button>
+                <button class="series-btn" data-series="iphone12">
+                    <i class="fas fa-mobile-alt"></i>iPhone 12 Series
+                </button>
+                <button class="series-btn" data-series="iphone11">
+                    <i class="fas fa-mobile-alt"></i>iPhone 11 Series
+                </button>
+                <button class="series-btn" data-series="iphonexs">
+                    <i class="fas fa-mobile-alt"></i>iPhone XS Series
+                </button>
+                <button class="series-btn" data-series="iphonex">
+                    <i class="fas fa-mobile-alt"></i>iPhone X
+                </button>
+                <button class="series-btn" data-series="iphone8">
+                    <i class="fas fa-mobile-alt"></i>iPhone 8 Series
+                </button>
+            </div>
+        </section>
+
+        <section id="iphone15" class="series-content active">
+            <h3 class="cyber-text">iPhone 15 Series</h3>
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="model-tag">Pro Max</div>
+                    <div class="product-image">
+                        <img src="images/iphone15-pro-max.jpg" alt="iPhone 15 Pro Max">
+                    </div>
+                    <h4>iPhone 15 Pro Max</h4>
+                    <div class="storage-options">
+                        <button class="storage-btn" data-price="32999">256GB</button>
+                        <button class="storage-btn" data-price="36999">512GB</button>
+                        <button class="storage-btn" data-price="42999">1TB</button>
+                    </div>
+                    <div class="specs-container">
+                        <div class="specs">
+                            <div class="specs-row">
+                                <i class="fas fa-mobile-alt"></i>
+                                <span>6.7" Super Retina XDR ProMotion</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-microchip"></i>
+                                <span>A17 Pro chip</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-camera"></i>
+                                <span>48MP Main | 12MP Ultra Wide | 12MP Tele</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-battery-full"></i>
+                                <span>Up to 29 hours video</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-wifi"></i>
+                                <span>5G | USB-C | Action Button</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="price-container">
+                        <div class="price">32,999</div>
+                        <div class="price-note">Includes VAT</div>
+                    </div>
+                    <button class="cyber-btn add-to-cart">
+                        <span class="btn-content">Add to Cart</span>
+                    </button>
+                </div>
+                <div class="product-card">
+                    <div class="model-tag">Pro</div>
+                    <div class="product-image">
+                        <img src="images/iphone15-pro.jpeg" alt="iPhone 15 Pro">
+                    </div>
+                    <h4>iPhone 15 Pro</h4>
+                    <div class="storage-options">
+                        <button class="storage-btn" data-price="28999">128GB</button>
+                        <button class="storage-btn" data-price="31999">256GB</button>
+                        <button class="storage-btn" data-price="37999">512GB</button>
+                        <button class="storage-btn" data-price="43999">1TB</button>
+                    </div>
+                    <div class="specs-container">
+                        <div class="specs">
+                            <div class="specs-row">
+                                <i class="fas fa-mobile-alt"></i>
+                                <span>6.1" Super Retina XDR ProMotion</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-microchip"></i>
+                                <span>A17 Pro chip</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-camera"></i>
+                                <span>48MP Main | 12MP Ultra Wide | 12MP Tele</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-battery-full"></i>
+                                <span>Up to 23 hours video</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-wifi"></i>
+                                <span>5G | USB-C | Action Button</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="price-container">
+                        <div class="price">28,999</div>
+                        <div class="price-note">Includes VAT</div>
+                    </div>
+                    <button class="cyber-btn add-to-cart">
+                        <span class="btn-content">Add to Cart</span>
+                    </button>
+                </div>
+                <div class="product-card">
+                    <div class="model-tag">15 Plus</div>
+                    <div class="product-image">
+                        <img src="images/iphone15-plus.jpeg" alt="iPhone 15 Plus">
+                    </div>
+                    <h4>iPhone 15 Plus</h4>
+                    <div class="storage-options">
+                        <button class="storage-btn" data-price="24999">128GB</button>
+                        <button class="storage-btn" data-price="27999">256GB</button>
+                        <button class="storage-btn" data-price="33999">512GB</button>
+                    </div>
+                    <div class="specs-container">
+                        <div class="specs">
+                            <div class="specs-row">
+                                <i class="fas fa-mobile-alt"></i>
+                                <span>6.7" Super Retina XDR</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-microchip"></i>
+                                <span>A16 Bionic chip</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-camera"></i>
+                                <span>48MP Main | 12MP Ultra Wide</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-battery-full"></i>
+                                <span>Up to 26 hours video</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-wifi"></i>
+                                <span>5G | USB-C | Dynamic Island</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="price-container">
+                        <div class="price">24,999</div>
+                        <div class="price-note">Includes VAT</div>
+                    </div>
+                    <button class="cyber-btn add-to-cart">
+                        <span class="btn-content">Add to Cart</span>
+                    </button>
+                </div>
+                <div class="product-card">
+                    <div class="model-tag">15</div>
+                    <div class="product-image">
+                        <img src="images/iphone15.jpg" alt="iPhone 15">
+                    </div>
+                    <h4>iPhone 15</h4>
+                    <div class="storage-options">
+                        <button class="storage-btn" data-price="21999">128GB</button>
+                        <button class="storage-btn" data-price="24999">256GB</button>
+                        <button class="storage-btn" data-price="30999">512GB</button>
+                    </div>
+                    <div class="specs-container">
+                        <div class="specs">
+                            <div class="specs-row">
+                                <i class="fas fa-mobile-alt"></i>
+                                <span>6.1" Super Retina XDR</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-microchip"></i>
+                                <span>A16 Bionic chip</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-camera"></i>
+                                <span>48MP Main | 12MP Ultra Wide</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-battery-full"></i>
+                                <span>Up to 20 hours video</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-wifi"></i>
+                                <span>5G | USB-C | Dynamic Island</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="price-container">
+                        <div class="price">21,999</div>
+                        <div class="price-note">Includes VAT</div>
+                    </div>
+                    <button class="cyber-btn add-to-cart">
+                        <span class="btn-content">Add to Cart</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section id="iphone14" class="series-content">
+            <h3 class="cyber-text">iPhone 14 Series</h3>
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="model-tag">Pro Max</div>
+                    <div class="product-image">
+                        <img src="images/iphone14-pro-max.jpg" alt="iPhone 14 Pro Max">
+                    </div>
+                    <h4>iPhone 14 Pro Max</h4>
+                    <div class="storage-options">
+                        <button class="storage-btn" data-price="25999">128GB</button>
+                        <button class="storage-btn" data-price="28999">256GB</button>
+                        <button class="storage-btn" data-price="34999">512GB</button>
+                        <button class="storage-btn" data-price="39999">1TB</button>
+                    </div>
+                    <div class="specs-container">
+                        <div class="specs">
+                            <div class="specs-row">
+                                <i class="fas fa-mobile-alt"></i>
+                                <span>6.7" Super Retina XDR ProMotion</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-microchip"></i>
+                                <span>A16 Bionic chip</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-camera"></i>
+                                <span>48MP Main | 12MP Ultra Wide | 12MP Tele</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-battery-full"></i>
+                                <span>Up to 29 hours video</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-wifi"></i>
+                                <span>5G | Lightning | Dynamic Island</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="price-container">
+                        <div class="price">25,999</div>
+                        <div class="price-note">Includes VAT</div>
+                    </div>
+                    <button class="cyber-btn add-to-cart">
+                        <span class="btn-content">Add to Cart</span>
+                    </button>
+                </div>
+                <div class="product-card">
+                    <div class="model-tag">14 Pro</div>
+                    <div class="product-image">
+                        <img src="images/iphone14-pro.jpg" alt="iPhone 14 Pro">
+                    </div>
+                    <h4>iPhone 14 Pro</h4>
+                    <div class="storage-options">
+                        <button class="storage-btn" data-price="23999">128GB</button>
+                        <button class="storage-btn" data-price="26999">256GB</button>
+                        <button class="storage-btn" data-price="32999">512GB</button>
+                        <button class="storage-btn" data-price="37999">1TB</button>
+                    </div>
+                    <div class="specs-container">
+                        <div class="specs">
+                            <div class="specs-row">
+                                <i class="fas fa-mobile-alt"></i>
+                                <span>6.1" Super Retina XDR ProMotion</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-microchip"></i>
+                                <span>A16 Bionic chip</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-camera"></i>
+                                <span>48MP Main | 12MP Ultra Wide | 12MP Tele</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-battery-full"></i>
+                                <span>Up to 23 hours video</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-wifi"></i>
+                                <span>5G | Lightning | Dynamic Island</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="price-container">
+                        <div class="price">23,999</div>
+                        <div class="price-note">Includes VAT</div>
+                    </div>
+                    <button class="cyber-btn add-to-cart">
+                        <span class="btn-content">Add to Cart</span>
+                    </button>
+                </div>
+                <div class="product-card">
+                    <div class="model-tag">14 Plus</div>
+                    <div class="product-image">
+                        <img src="images/iphone14-plus.jpg" alt="iPhone 14 Plus">
+                    </div>
+                    <h4>iPhone 14 Plus</h4>
+                    <div class="storage-options">
+                        <button class="storage-btn" data-price="20999">128GB</button>
+                        <button class="storage-btn" data-price="23999">256GB</button>
+                        <button class="storage-btn" data-price="29999">512GB</button>
+                    </div>
+                    <div class="specs-container">
+                        <div class="specs">
+                            <div class="specs-row">
+                                <i class="fas fa-mobile-alt"></i>
+                                <span>6.7" Super Retina XDR</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-microchip"></i>
+                                <span>A15 Bionic chip</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-camera"></i>
+                                <span>12MP Dual Camera System</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-battery-full"></i>
+                                <span>Up to 26 hours video</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-wifi"></i>
+                                <span>5G | Lightning</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="price-container">
+                        <div class="price">20,999</div>
+                        <div class="price-note">Includes VAT</div>
+                    </div>
+                    <button class="cyber-btn add-to-cart">
+                        <span class="btn-content">Add to Cart</span>
+                    </button>
+                </div>
+                <div class="product-card">
+                    <div class="model-tag">14</div>
+                    <div class="product-image">
+                        <img src="images/iphone14.jpg" alt="iPhone 14">
+                    </div>
+                    <h4>iPhone 14</h4>
+                    <div class="storage-options">
+                        <button class="storage-btn" data-price="18999">128GB</button>
+                        <button class="storage-btn" data-price="21999">256GB</button>
+                        <button class="storage-btn" data-price="27999">512GB</button>
+                    </div>
+                    <div class="specs-container">
+                        <div class="specs">
+                            <div class="specs-row">
+                                <i class="fas fa-mobile-alt"></i>
+                                <span>6.1" Super Retina XDR</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-microchip"></i>
+                                <span>A15 Bionic chip</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-camera"></i>
+                                <span>12MP Dual Camera System</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-battery-full"></i>
+                                <span>Up to 20 hours video</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-wifi"></i>
+                                <span>5G | Lightning</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="price-container">
+                        <div class="price">18,999</div>
+                        <div class="price-note">Includes VAT</div>
+                    </div>
+                    <button class="cyber-btn add-to-cart">
+                        <span class="btn-content">Add to Cart</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section id="iphone13" class="series-content">
+            <h3 class="cyber-text">iPhone 13 Series</h3>
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="model-tag">13 Pro Max</div>
+                    <div class="product-image">
+                        <img src="images/iphone13-promax.jpg" alt="iPhone 13 Pro Max">
+                    </div>
+                    <h4>iPhone 13 Pro Max</h4>
+                    <div class="storage-options">
+                        <button class="storage-btn" data-price="19999">128GB</button>
+                        <button class="storage-btn" data-price="21999">256GB</button>
+                        <button class="storage-btn" data-price="23999">512GB</button>
+                        <button class="storage-btn" data-price="25999">1TB</button>
+                </div>
+                    <div class="specs-container">
+                        <div class="specs">
+                            <div class="specs-row">
+                                <i class="fas fa-mobile-alt"></i>
+                                <span>6.7" Super Retina XDR</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-microchip"></i>
+                                <span>A15 Bionic chip</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-camera"></i>
+                                <span>Pro Camera System</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-mobile"></i>
+                                <span>Face ID</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="price-container">
+                        <div class="price">19,999</div>
+                        <div class="price-note">Includes VAT</div>
+                    </div>
+                    <button class="cyber-btn add-to-cart">
+                        <span class="btn-content">Add to Cart</span>
+                    </button>
+                </div>
+
+                <div class="product-card">
+                    <div class="model-tag">13 Pro</div>
+                    <div class="product-image">
+                    <img src="images/iphone13-pro.jpg" alt="iPhone 13 Pro">
+                    </div>
+                    <h4>iPhone 13 Pro</h4>
+                    <div class="storage-options">
+                        <button class="storage-btn" data-price="18999">128GB</button>
+                        <button class="storage-btn" data-price="20999">256GB</button>
+                        <button class="storage-btn" data-price="22999">512GB</button>
+                        <button class="storage-btn" data-price="24999">1TB</button>
+                </div>
+                    <div class="specs-container">
+                        <div class="specs">
+                            <div class="specs-row">
+                                <i class="fas fa-mobile-alt"></i>
+                                <span>6.1" Super Retina XDR</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-microchip"></i>
+                                <span>A15 Bionic chip</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-camera"></i>
+                                <span>Pro Camera System</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-mobile"></i>
+                                <span>Face ID</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="price-container">
+                        <div class="price">18,999</div>
+                        <div class="price-note">Includes VAT</div>
+                    </div>
+                    <button class="cyber-btn add-to-cart">
+                        <span class="btn-content">Add to Cart</span>
+                    </button>
+                </div>
+
+                <div class="product-card">
+                    <div class="model-tag">13</div>
+                    <div class="product-image">
+                    <img src="images/iphone13.jpg" alt="iPhone 13">
+                    </div>
+                    <h4>iPhone 13</h4>
+                    <div class="storage-options">
+                        <button class="storage-btn" data-price="15999">128GB</button>
+                        <button class="storage-btn" data-price="17999">256GB</button>
+                        <button class="storage-btn" data-price="19999">512GB</button>
+                </div>
+                    <div class="specs-container">
+                        <div class="specs">
+                            <div class="specs-row">
+                                <i class="fas fa-mobile-alt"></i>
+                                <span>6.1" Super Retina XDR</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-microchip"></i>
+                                <span>A15 Bionic chip</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-camera"></i>
+                                <span>Dual 12MP Camera</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-mobile"></i>
+                                <span>Face ID</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="price-container">
+                        <div class="price">15,999</div>
+                        <div class="price-note">Includes VAT</div>
+                    </div>
+                    <button class="cyber-btn add-to-cart">
+                        <span class="btn-content">Add to Cart</span>
+                    </button>
+                </div>
+
+                <div class="product-card">
+                    <div class="model-tag">13 Mini</div>
+                    <div class="product-image">
+                    <img src="images/iphone13-mini.jpg" alt="iPhone 13 Mini">
+                    </div>
+                    <h4>iPhone 13 Mini</h4>
+                    <div class="storage-options">
+                        <button class="storage-btn" data-price="13999">128GB</button>
+                        <button class="storage-btn" data-price="15999">256GB</button>
+                        <button class="storage-btn" data-price="17999">512GB</button>
+                    </div>
+                    <div class="specs-container">
+                        <div class="specs">
+                            <div class="specs-row">
+                                <i class="fas fa-mobile-alt"></i>
+                                <span>5.4" Super Retina XDR</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-microchip"></i>
+                                <span>A15 Bionic chip</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-camera"></i>
+                                <span>Dual 12MP Camera</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-mobile"></i>
+                                <span>Face ID</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="price-container">
+                        <div class="price">13,999</div>
+                        <div class="price-note">Includes VAT</div>
+                    </div>
+                    <button class="cyber-btn add-to-cart">
+                        <span class="btn-content">Add to Cart</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section id="iphone12" class="series-content">
+            <h3 class="cyber-text">iPhone 12 Series</h3>
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="model-tag">12 Pro</div>
+                    <div class="product-image">
+                        <img src="images/iphone12-pro.jpg" alt="iPhone 12 Pro">
+                    </div>
+                    <h4>iPhone 12 Pro</h4>
+                    <div class="storage-options">
+                        <button class="storage-btn" data-price="17999">128GB</button>
+                        <button class="storage-btn" data-price="19999">256GB</button>
+                        <button class="storage-btn" data-price="21999">512GB</button>
+                    </div>
+                    <div class="specs-container">
+                        <div class="specs">
+                            <div class="specs-row">
+                                <i class="fas fa-mobile-alt"></i>
+                                <span>6.1" Super Retina XDR</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-microchip"></i>
+                                <span>A14 Bionic chip</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-camera"></i>
+                                <span>Pro Camera System</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-mobile"></i>
+                                <span>Face ID</span>
+                            </div>
+                            </div>
+                        </div>
+                    <div class="price-container">
+                        <div class="price">17,999</div>
+                        <div class="price-note">Includes VAT</div>
+                    </div>
+                    <button class="cyber-btn add-to-cart">
+                        <span class="btn-content">Add to Cart</span>
+                    </button>
+                </div>
+
+                <div class="product-card">
+                    <div class="model-tag">12</div>
+                    <div class="product-image">
+                        <img src="images/iphone12.jpg" alt="iPhone 12">
+                </div>
+                    <h4>iPhone 12</h4>
+                    <div class="storage-options">
+                        <button class="storage-btn" data-price="14999">64GB</button>
+                        <button class="storage-btn" data-price="15999">128GB</button>
+                        <button class="storage-btn" data-price="16999">256GB</button>
+                    </div>
+                    <div class="specs-container">
+                        <div class="specs">
+                            <div class="specs-row">
+                                <i class="fas fa-mobile-alt"></i>
+                                <span>6.1" Super Retina XDR</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-microchip"></i>
+                                <span>A14 Bionic chip</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-camera"></i>
+                                <span>Dual 12MP Camera</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-mobile"></i>
+                                <span>Face ID</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="price-container">
+                        <div class="price">14,999</div>
+                        <div class="price-note">Includes VAT</div>
+                    </div>
+                    <button class="cyber-btn add-to-cart">
+                        <span class="btn-content">Add to Cart</span>
+                    </button>
+                </div>
+
+                <div class="product-card">
+                    <div class="model-tag">12 Mini</div>
+                    <div class="product-image">
+                    <img src="images/iphone12-mini.jpg" alt="iPhone 12 Mini">
+                    </div>
+                    <h4>iPhone 12 Mini</h4>
+                    <div class="storage-options">
+                        <button class="storage-btn" data-price="12999">64GB</button>
+                        <button class="storage-btn" data-price="13999">128GB</button>
+                        <button class="storage-btn" data-price="14999">256GB</button>
+                </div>
+                    <div class="specs-container">
+                        <div class="specs">
+                            <div class="specs-row">
+                                <i class="fas fa-mobile-alt"></i>
+                                <span>5.4" Super Retina XDR</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-microchip"></i>
+                                <span>A14 Bionic chip</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-camera"></i>
+                                <span>Dual 12MP Camera</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-mobile"></i>
+                                <span>Face ID</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="price-container">
+                        <div class="price">12,999</div>
+                        <div class="price-note">Includes VAT</div>
+                    </div>
+                    <button class="cyber-btn add-to-cart">
+                        <span class="btn-content">Add to Cart</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section id="iphone11" class="series-content">
+            <h3 class="cyber-text">iPhone 11 Series</h3>
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="model-tag">11 Pro Max</div>
+                    <div class="product-image">
+                        <img src="images/iphone11-promax.jpg" alt="iPhone 11 Pro Max">
+                    </div>
+                    <h4>iPhone 11 Pro Max</h4>
+                    <div class="storage-options">
+                        <button class="storage-btn" data-price="15999">64GB</button>
+                        <button class="storage-btn" data-price="17999">256GB</button>
+                        <button class="storage-btn" data-price="19999">512GB</button>
+                </div>
+                    <div class="specs-container">
+                        <div class="specs">
+                            <div class="specs-row">
+                                <i class="fas fa-mobile-alt"></i>
+                                <span>6.5" Super Retina XDR</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-microchip"></i>
+                                <span>A13 Bionic chip</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-camera"></i>
+                                <span>Triple 12MP Camera</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-mobile"></i>
+                                <span>Face ID</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="price-container">
+                        <div class="price">15,999</div>
+                        <div class="price-note">Includes VAT</div>
+                    </div>
+                    <button class="cyber-btn add-to-cart">
+                        <span class="btn-content">Add to Cart</span>
+                    </button>
+                </div>
+
+                <div class="product-card">
+                    <div class="model-tag">11 Pro</div>
+                    <div class="product-image">
+                    <img src="images/iphone11-pro.jpg" alt="iPhone 11 Pro">
+                    </div>
+                    <h4>iPhone 11 Pro</h4>
+                    <div class="storage-options">
+                        <button class="storage-btn" data-price="14999">64GB</button>
+                        <button class="storage-btn" data-price="16999">256GB</button>
+                        <button class="storage-btn" data-price="18999">512GB</button>
+                </div>
+                    <div class="specs-container">
+                        <div class="specs">
+                            <div class="specs-row">
+                                <i class="fas fa-mobile-alt"></i>
+                                <span>5.8" Super Retina XDR</span>
+                </div>
+                            <div class="specs-row">
+                                <i class="fas fa-microchip"></i>
+                                <span>A13 Bionic chip</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-camera"></i>
+                                <span>Triple 12MP Camera</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-mobile"></i>
+                                <span>Face ID</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="price-container">
+                        <div class="price">14,999</div>
+                        <div class="price-note">Includes VAT</div>
+                    </div>
+                    <button class="cyber-btn add-to-cart">
+                        <span class="btn-content">Add to Cart</span>
+                    </button>
+                </div>
+
+                <div class="product-card">
+                    <div class="model-tag">11</div>
+                    <div class="product-image">
+                    <img src="images/iphone11.jpg" alt="iPhone 11">
+                    </div>
+                    <h4>iPhone 11</h4>
+                    <div class="storage-options">
+                        <button class="storage-btn" data-price="11999">64GB</button>
+                        <button class="storage-btn" data-price="12999">128GB</button>
+                        <button class="storage-btn" data-price="13999">256GB</button>
+                    </div>
+                    <div class="specs-container">
+                        <div class="specs">
+                            <div class="specs-row">
+                                <i class="fas fa-mobile-alt"></i>
+                                <span>6.1" Liquid Retina HD</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-microchip"></i>
+                                <span>A13 Bionic chip</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-camera"></i>
+                                <span>Dual 12MP Camera</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-mobile"></i>
+                                <span>Face ID</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="price-container">
+                        <div class="price">11,999</div>
+                        <div class="price-note">Includes VAT</div>
+                    </div>
+                    <button class="cyber-btn add-to-cart">
+                        <span class="btn-content">Add to Cart</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section id="iphonex" class="series-content">
+            <h3 class="cyber-text">iPhone X</h3>
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="model-tag">X</div>
+                    <div class="product-image">
+                        <img src="images/iphonex.jpg" alt="iPhone X">
+                    </div>
+                    <h4>iPhone X</h4>
+                    <div class="storage-options">
+                        <button class="storage-btn" data-price="9999">64GB</button>
+                        <button class="storage-btn" data-price="11999">256GB</button>
+                    </div>
+                    <div class="specs-container">
+                        <div class="specs">
+                            <div class="specs-row">
+                                <i class="fas fa-mobile-alt"></i>
+                                <span>5.8" Super Retina HD</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-microchip"></i>
+                                <span>A11 Bionic chip</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-camera"></i>
+                                <span>12MP Dual Camera</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-mobile"></i>
+                                <span>Face ID</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="price-container">
+                        <div class="price">9,999</div>
+                        <div class="price-note">Includes VAT</div>
+                    </div>
+                    <button class="cyber-btn add-to-cart">
+                        <span class="btn-content">Add to Cart</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section id="iphonexs" class="series-content">
+            <h3 class="cyber-text">iPhone XS Series</h3>
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="model-tag">XS Max</div>
+                    <div class="product-image">
+                        <img src="images/iphonexs-max.jpg" alt="iPhone XS Max">
+                    </div>
+                    <h4>iPhone XS Max</h4>
+                    <div class="storage-options">
+                        <button class="storage-btn" data-price="12999">64GB</button>
+                        <button class="storage-btn" data-price="14999">256GB</button>
+                        <button class="storage-btn" data-price="16999">512GB</button>
+                    </div>
+                    <div class="specs-container">
+                        <div class="specs">
+                            <div class="specs-row">
+                                <i class="fas fa-mobile-alt"></i>
+                                <span>6.5" Super Retina HD</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-microchip"></i>
+                                <span>A12 Bionic chip</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-camera"></i>
+                                <span>12MP Dual Camera</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-mobile"></i>
+                                <span>Face ID</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="price-container">
+                        <div class="price">12,999</div>
+                        <div class="price-note">Includes VAT</div>
+                    </div>
+                    <button class="cyber-btn add-to-cart">
+                        <span class="btn-content">Add to Cart</span>
+                    </button>
+                </div>
+
+                <div class="product-card">
+                    <div class="model-tag">XS</div>
+                    <div class="product-image">
+                        <img src="images/iphonexs.jpg" alt="iPhone XS">
+                    </div>
+                    <h4>iPhone XS</h4>
+                    <div class="storage-options">
+                        <button class="storage-btn" data-price="11999">64GB</button>
+                        <button class="storage-btn" data-price="13999">256GB</button>
+                        <button class="storage-btn" data-price="15999">512GB</button>
+                    </div>
+                    <div class="specs-container">
+                        <div class="specs">
+                            <div class="specs-row">
+                                <i class="fas fa-mobile-alt"></i>
+                                <span>5.8" Super Retina HD</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-microchip"></i>
+                                <span>A12 Bionic chip</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-camera"></i>
+                                <span>12MP Dual Camera</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-mobile"></i>
+                                <span>Face ID</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="price-container">
+                        <div class="price">11,999</div>
+                        <div class="price-note">Includes VAT</div>
+                    </div>
+                    <button class="cyber-btn add-to-cart">
+                        <span class="btn-content">Add to Cart</span>
+                    </button>
+                </div>
+
+                <div class="product-card">
+                    <div class="model-tag">XR</div>
+                    <div class="product-image">
+                        <img src="images/iphonexr.jpg" alt="iPhone XR">
+                    </div>
+                    <h4>iPhone XR</h4>
+                    <div class="storage-options">
+                        <button class="storage-btn" data-price="9999">64GB</button>
+                        <button class="storage-btn" data-price="10999">128GB</button>
+                        <button class="storage-btn" data-price="11999">256GB</button>
+                    </div>
+                    <div class="specs-container">
+                        <div class="specs">
+                            <div class="specs-row">
+                                <i class="fas fa-mobile-alt"></i>
+                                <span>6.1" Liquid Retina HD</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-microchip"></i>
+                                <span>A12 Bionic chip</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-camera"></i>
+                                <span>12MP Camera</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-mobile"></i>
+                                <span>Face ID</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="price-container">
+                        <div class="price">9,999</div>
+                        <div class="price-note">Includes VAT</div>
+                    </div>
+                    <button class="cyber-btn add-to-cart">
+                        <span class="btn-content">Add to Cart</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section id="iphone8" class="series-content">
+            <h3 class="cyber-text">iPhone 8 Series</h3>
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="model-tag">8 Plus</div>
+                    <div class="product-image">
+                        <img src="images/iphone8-plus.jpg" alt="iPhone 8 Plus">
+                    </div>
+                    <h4>iPhone 8 Plus</h4>
+                    <div class="storage-options">
+                        <button class="storage-btn" data-price="7999">64GB</button>
+                        <button class="storage-btn" data-price="8999">128GB</button>
+                        <button class="storage-btn" data-price="9999">256GB</button>
+                    </div>
+                    <div class="specs-container">
+                        <div class="specs">
+                            <div class="specs-row">
+                                <i class="fas fa-mobile-alt"></i>
+                                <span>5.5" Retina HD</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-microchip"></i>
+                                <span>A11 Bionic chip</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-camera"></i>
+                                <span>12MP Dual Camera</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-fingerprint"></i>
+                                <span>Touch ID</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="price-container">
+                        <div class="price">7,999</div>
+                        <div class="price-note">Includes VAT</div>
+                    </div>
+                    <button class="cyber-btn add-to-cart">
+                        <span class="btn-content">Add to Cart</span>
+                    </button>
+                </div>
+
+                <div class="product-card">
+                    <div class="model-tag">8</div>
+                    <div class="product-image">
+                        <img src="images/iphone8.jpg" alt="iPhone 8">
+                    </div>
+                    <h4>iPhone 8</h4>
+                    <div class="storage-options">
+                        <button class="storage-btn" data-price="6999">64GB</button>
+                        <button class="storage-btn" data-price="7999">128GB</button>
+                        <button class="storage-btn" data-price="8999">256GB</button>
+                    </div>
+                    <div class="specs-container">
+                        <div class="specs">
+                            <div class="specs-row">
+                                <i class="fas fa-mobile-alt"></i>
+                                <span>4.7" Retina HD</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-microchip"></i>
+                                <span>A11 Bionic chip</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-camera"></i>
+                                <span>12MP Camera</span>
+                            </div>
+                            <div class="specs-row">
+                                <i class="fas fa-fingerprint"></i>
+                                <span>Touch ID</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="price-container">
+                        <div class="price">6,999</div>
+                        <div class="price-note">Includes VAT</div>
+                    </div>
+                    <button class="cyber-btn add-to-cart">
+                        <span class="btn-content">Add to Cart</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="features-section">
+            <h2>Why Choose Our iPhones?</h2>
+            <div class="features-grid">
+                <div class="feature-card" data-aos="fade-up">
+                    <i class="fas fa-check-circle"></i>
+                    <h3>Authentic Products</h3>
+                    <p>All our iPhones are 100% authentic and sourced directly from authorized dealers.</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Warranty Included</h3>
+                    <p>Every iPhone comes with a full manufacturer warranty and our store guarantee.</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
+                    <i class="fas fa-sync"></i>
+                    <h3>Easy Returns</h3>
+                    <p>30-day hassle-free return policy for your peace of mind.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="modern-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About Us</h3>
+                <p>Bazzar Collections is your premium destination for authentic sneakers and the latest iPhones.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="sneakers.html">Sneakers</a></li>
+                    <li><a href="iphones.html">iPhones</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Bazzar Collections. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="cart.js"></script>
+    <script src="search.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize AOS
+            AOS.init();
+            
+            // Series navigation functionality
+            const seriesButtons = document.querySelectorAll('.series-btn');
+            const seriesContents = document.querySelectorAll('.series-content');
+
+            seriesButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    seriesButtons.forEach(btn => btn.classList.remove('active'));
+                    seriesContents.forEach(content => content.classList.remove('active'));
+
+                    button.classList.add('active');
+
+                    const targetSeries = button.dataset.series;
+                    const targetContent = document.getElementById(targetSeries);
+                    if (targetContent) {
+                        targetContent.classList.add('active');
+                        targetContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
+
+            // Storage selection with price update
+            const storageButtons = document.querySelectorAll('.storage-btn');
+            storageButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const card = btn.closest('.product-card');
+                    const priceElement = card.querySelector('.price');
+                    const currentPrice = priceElement.textContent;
+                    const newPrice = btn.dataset.price;
+                    
+                    // Remove active class from all buttons in this card
+                    card.querySelectorAll('.storage-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+
+                    // Update price
+                    if (currentPrice !== newPrice) {
+                        priceElement.textContent = newPrice;
+                    }
+                });
+            });
+
+            // Set first storage option as active for each product
+            document.querySelectorAll('.storage-options').forEach(options => {
+                const firstBtn = options.querySelector('.storage-btn');
+                if (firstBtn) firstBtn.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html> 

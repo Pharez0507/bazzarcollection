@@ -1,0 +1,218 @@
+/* Back Button Styles */
+.back-to-cart {
+    margin-bottom: 20px;
+}
+
+.back-btn {
+    background: transparent;
+    border: 1px solid var(--secondary-color);
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+    background: rgba(255, 215, 0, 0.1);
+    transform: translateX(-5px);
+}
+
+.back-btn i {
+    font-size: 0.8rem;
+}
+
+/* Checkout Page Styles */
+.checkout-page {
+    padding: 80px 20px 40px;
+    min-height: 100vh;
+    background: var(--dark-bg);
+}
+
+.checkout-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.checkout-content {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+/* Form Styles */
+.checkout-form {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    border-radius: 15px;
+    padding: 30px;
+    backdrop-filter: blur(10px);
+}
+
+.form-section {
+    margin-bottom: 30px;
+}
+
+.form-section h2 {
+    color: var(--text-color);
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.cyber-input {
+    width: 100%;
+    padding: 12px 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    border-radius: 8px;
+    color: var(--text-color);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.cyber-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+}
+
+.cyber-label {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--secondary-color);
+    transition: all 0.3s ease;
+    pointer-events: none;
+    font-size: 0.9rem;
+}
+
+.cyber-input:focus + .cyber-label,
+.cyber-input:not(:placeholder-shown) + .cyber-label {
+    top: -10px;
+    left: 10px;
+    font-size: 0.8rem;
+    background: var(--dark-bg);
+    padding: 0 5px;
+}
+
+select.cyber-input {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23ffd700' viewBox='0 0 16 16'%3E%3Cpath d='M8 11.5l-6-6h12z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    padding-right: 40px;
+}
+
+/* Order Summary Styles */
+.order-summary {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    border-radius: 15px;
+    padding: 25px;
+    height: fit-content;
+    backdrop-filter: blur(10px);
+}
+
+.order-summary h2 {
+    color: var(--text-color);
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+}
+
+.summary-details {
+    margin-top: 20px;
+    border-top: 1px solid rgba(255, 215, 0, 0.3);
+    padding-top: 20px;
+}
+
+/* Place Order Button */
+.place-order-btn {
+    width: 100%;
+    margin-top: 30px;
+    padding: 15px;
+    font-size: 1.1rem;
+    background: var(--gradient-primary);
+    border: none;
+    border-radius: 8px;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.place-order-btn:hover {
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+    transform: translateY(-2px);
+}
+
+.place-order-btn i {
+    margin-right: 10px;
+}
+
+/* Form Validation Styles */
+.cyber-input:invalid {
+    border-color: #ff4444;
+}
+
+.cyber-input:invalid:focus {
+    box-shadow: 0 0 15px rgba(255, 68, 68, 0.2);
+}
+
+/* Responsive Design */
+@media (max-width: 968px) {
+    .checkout-content {
+        grid-template-columns: 1fr;
+    }
+
+    .order-summary {
+        order: -1;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .checkout-form {
+        padding: 20px;
+    }
+}
+
+/* Animation for Form Elements */
+@keyframes formFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.form-section {
+    animation: formFadeIn 0.5s ease forwards;
+}
+
+.form-section:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.form-section:nth-child(3) {
+    animation-delay: 0.4s;
+} 

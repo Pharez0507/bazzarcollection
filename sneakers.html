@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sneakers - Bazzar Collections</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="cart.css">
+    <link rel="stylesheet" href="search.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-text">Bazzar_Collection</div>
+                <div class="logo-dot"></div>
+            </a>
+
+            <div class="hamburger">
+                <div class="hamburger-lines">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+
+            <div class="nav-icons">
+                <div class="location">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>ZA</span>
+                </div>
+                <div class="search-icon">
+                    <i class="fas fa-search"></i>
+                </div>
+                <div class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Modal -->
+    <div id="search-modal" class="modal">
+        <div class="modal-content search-modal-content">
+            <div class="modal-header">
+                <div class="search-input-container">
+                    <i class="fas fa-search search-icon-input"></i>
+                    <input type="text" id="search-input" placeholder="Search for products..." autofocus>
+                </div>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="search-results">
+                    <div class="search-message">Type at least 2 characters to search</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div id="cart-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Shopping Cart</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="cart-items">
+                    <!-- Cart items will be dynamically added here -->
+                </div>
+                <div class="cart-summary">
+                    <div class="summary-item">
+                        <span>Total</span>
+                        <span class="total-amount">R0.00</span>
+                    </div>
+                    <button class="cyber-btn view-cart-btn" onclick="window.location.href='cart.html'">
+                        <span class="btn-content">View Cart</span>
+                    </button>
+                    <button class="cyber-btn checkout-btn" onclick="window.location.href='checkout.html'">
+                        <span class="btn-content">Checkout</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <template id="cart-item-template">
+        <div class="cart-item">
+            <div class="item-image">
+                <img src="" alt="">
+            </div>
+            <div class="item-details">
+                <h3 class="item-name"></h3>
+                <div class="item-variant">
+                    <span class="storage"></span>
+                </div>
+                <div class="item-price"></div>
+            </div>
+            <div class="item-quantity">
+                <button class="quantity-btn decrease">-</button>
+                <input type="number" value="1" min="1" max="99">
+                <button class="quantity-btn increase">+</button>
+            </div>
+            <div class="item-total"></div>
+            <button class="remove-item">
+                <i class="fas fa-trash"></i>
+            </button>
+        </div>
+    </template>
+
+    <div class="menu-overlay">
+        <div class="menu-content">
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">
+                    <span class="link-icon"><i class="fas fa-home"></i></span>
+                    <span class="link-text">Home</span>
+                </a></li>
+                <li><a href="sneakers.html" class="nav-link active">
+                    <span class="link-icon"><i class="fas fa-shoe-prints"></i></span>
+                    <span class="link-text">Sneakers</span>
+                </a></li>
+                <li><a href="iphones.html" class="nav-link">
+                    <span class="link-icon"><i class="fas fa-mobile-alt"></i></span>
+                    <span class="link-text">iPhones</span>
+                </a></li>
+                <li><a href="#contact" class="nav-link">
+                    <span class="link-icon"><i class="fas fa-envelope"></i></span>
+                    <span class="link-text">Contact</span>
+                </a></li>
+            </ul>
+        </div>
+    </div>
+
+    <main class="sneakers-page">
+        <section class="products-header">
+            <h1 class="glitch" data-text="Sneakers Collection">Sneakers Collection</h1>
+            <div class="filter-button">
+                <i class="fas fa-filter"></i>
+                <span>Filter</span>
+            </div>
+        </section>
+
+        <div class="filter-overlay">
+            <div class="filter-panel">
+                <div class="filter-header">
+                    <h3>Filters</h3>
+                    <button class="close-filter">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <div class="filter-options">
+                    <div class="filter-category">
+                        <div class="filter-title">
+                            <span>Brand</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="filter-content">
+                            <label class="custom-checkbox">
+                                <input type="checkbox" name="brand" value="nike">
+                                <span class="checkmark"></span>
+                                Nike
+                            </label>
+                            <label class="custom-checkbox">
+                                <input type="checkbox" name="brand" value="adidas">
+                                <span class="checkmark"></span>
+                                Adidas
+                            </label>
+                            <label class="custom-checkbox">
+                                <input type="checkbox" name="brand" value="jordan">
+                                <span class="checkmark"></span>
+                                Jordan
+                            </label>
+                            <label class="custom-checkbox">
+                                <input type="checkbox" name="brand" value="puma">
+                                <span class="checkmark"></span>
+                                Puma
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="filter-category">
+                        <div class="filter-title">
+                            <span>Price Range</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="filter-content">
+                            <label class="custom-checkbox">
+                                <input type="checkbox" name="price" value="0-100">
+                                <span class="checkmark"></span>
+                                $0 - $100
+                            </label>
+                            <label class="custom-checkbox">
+                                <input type="checkbox" name="price" value="101-200">
+                                <span class="checkmark"></span>
+                                $101 - $200
+                            </label>
+                            <label class="custom-checkbox">
+                                <input type="checkbox" name="price" value="201-300">
+                                <span class="checkmark"></span>
+                                $201 - $300
+                            </label>
+                            <label class="custom-checkbox">
+                                <input type="checkbox" name="price" value="301+">
+                                <span class="checkmark"></span>
+                                $301+
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="filter-category">
+                        <div class="filter-title">
+                            <span>Size</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="filter-content">
+                            <label class="custom-checkbox">
+                                <input type="checkbox" name="size" value="7">
+                                <span class="checkmark"></span>
+                                US 7
+                            </label>
+                            <label class="custom-checkbox">
+                                <input type="checkbox" name="size" value="8">
+                                <span class="checkmark"></span>
+                                US 8
+                            </label>
+                            <label class="custom-checkbox">
+                                <input type="checkbox" name="size" value="9">
+                                <span class="checkmark"></span>
+                                US 9
+                            </label>
+                            <label class="custom-checkbox">
+                                <input type="checkbox" name="size" value="10">
+                                <span class="checkmark"></span>
+                                US 10
+                            </label>
+                            <label class="custom-checkbox">
+                                <input type="checkbox" name="size" value="11">
+                                <span class="checkmark"></span>
+                                US 11
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filter-actions">
+                    <button class="clear-filters">Clear All</button>
+                    <button class="apply-filters">Apply Filters</button>
+                </div>
+            </div>
+        </div>
+
+        <section class="products-grid" id="sneakers-grid">
+            <!-- Products will be dynamically loaded here -->
+        </section>
+    </main>
+
+    <footer class="modern-footer">
+        <!-- Same footer as index.html -->
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About Us</h3>
+                <p>Bazzar Collections is your premium destination for authentic sneakers and the latest iPhones.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="sneakers.html">Sneakers</a></li>
+                    <li><a href="iphones.html">iPhones</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Bazzar Collections. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="cart.js"></script>
+    <script src="search.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize AOS
+            AOS.init();
+        });
+    </script>
+</body>
+</html> 

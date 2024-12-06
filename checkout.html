@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Bazzar Collections</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="cart.css">
+    <link rel="stylesheet" href="checkout.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-text">Bazzar_Collection</div>
+                <div class="logo-dot"></div>
+            </a>
+
+            <div class="nav-icons">
+                <div class="location">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>ZA</span>
+                </div>
+                <div class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="checkout-page">
+        <div class="checkout-container">
+            <div class="back-to-cart">
+                <button class="cyber-btn back-btn" onclick="window.location.href='cart.html'">
+                    <span class="btn-content">
+                        <i class="fas fa-arrow-left"></i>
+                        Back to Cart
+                    </span>
+                </button>
+            </div>
+            <h1 class="cyber-text">Checkout</h1>
+            
+            <div class="checkout-content">
+                <div class="checkout-form">
+                    <form id="checkout-form" class="cyber-form">
+                        <div class="form-section">
+                            <h2>Contact Information</h2>
+                            <div class="form-group">
+                                <input type="email" id="email" required class="cyber-input">
+                                <label class="cyber-label">Email Address</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="tel" id="phone" required class="cyber-input">
+                                <label class="cyber-label">Phone Number</label>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h2>Shipping Address</h2>
+                            <div class="form-group">
+                                <input type="text" id="fullname" required class="cyber-input">
+                                <label class="cyber-label">Full Name</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="address" required class="cyber-input">
+                                <label class="cyber-label">Street Address</label>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <input type="text" id="city" required class="cyber-input">
+                                    <label class="cyber-label">City</label>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" id="postal" required class="cyber-input">
+                                    <label class="cyber-label">Postal Code</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <select id="province" required class="cyber-input">
+                                    <option value="">Select Province</option>
+                                    <option value="GP">Gauteng</option>
+                                    <option value="WC">Western Cape</option>
+                                    <option value="KZN">KwaZulu-Natal</option>
+                                    <option value="EC">Eastern Cape</option>
+                                    <option value="FS">Free State</option>
+                                    <option value="LP">Limpopo</option>
+                                    <option value="MP">Mpumalanga</option>
+                                    <option value="NW">North West</option>
+                                    <option value="NC">Northern Cape</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h2>Payment Information</h2>
+                            <div class="form-group">
+                                <input type="text" id="card-number" required class="cyber-input" maxlength="19">
+                                <label class="cyber-label">Card Number</label>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <input type="text" id="expiry" required class="cyber-input" maxlength="5">
+                                    <label class="cyber-label">Expiry (MM/YY)</label>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" id="cvv" required class="cyber-input" maxlength="3">
+                                    <label class="cyber-label">CVV</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="cyber-btn place-order-btn">
+                            <span class="btn-content">
+                                <i class="fas fa-lock"></i>
+                                Place Order
+                            </span>
+                        </button>
+                    </form>
+                </div>
+
+                <div class="order-summary">
+                    <h2>Order Summary</h2>
+                    <div class="cart-items">
+                        <!-- Cart items will be dynamically added here -->
+                    </div>
+                    <div class="summary-details">
+                        <div class="summary-item">
+                            <span>Subtotal</span>
+                            <span class="subtotal">R0.00</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Shipping</span>
+                            <span class="shipping">R150.00</span>
+                        </div>
+                        <div class="summary-item total">
+                            <span>Total</span>
+                            <span class="total-amount">R0.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="cart.js"></script>
+    <script src="checkout.js"></script>
+</body>
+</html> 
