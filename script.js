@@ -17,6 +17,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 2000);
     }
 
+
+    //Scroll to top
+    window.scrollToTop = function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+    
     // Hamburger Menu
     const hamburger = document.querySelector('.hamburger');
     const menuOverlay = document.querySelector('.menu-overlay');

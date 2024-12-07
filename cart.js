@@ -12,9 +12,14 @@ class Cart {
     init() {
         // Initialize event listeners
         this.cartIcon.addEventListener('click', () => this.toggleModal());
-        this.closeBtn.addEventListener('click', () => this.toggleModal());
+        this.closeBtn.addEventListener('click', () => this.closeModal());
         window.addEventListener('click', (e) => {
-            if (e.target === this.modal) this.toggleModal();
+            if (e.target === this.modal) this.closeModal();
+        });
+
+        // Prevent cart modal from opening when search modal is closed
+        document.addEventListener('searchModalClosed', () => {
+            this.modal.style.display = 'none'; // Ensure cart modal is closed
         });
 
         // Initialize quantity buttons
@@ -44,8 +49,16 @@ class Cart {
         this.updateDisplay();
     }
 
+    closeModal() {
+        this.modal.style.display = 'none';
+    }
+
     toggleModal() {
-        this.modal.style.display = this.modal.style.display === 'block' ? 'none' : 'block';
+        if (this.modal.style.display === 'block') {
+            this.closeModal();
+        } else {
+            this.modal.style.display = 'block';
+        }
     }
 
     addItem(item) {
