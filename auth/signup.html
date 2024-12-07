@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Bazzar Collection</title>
+    <link rel="stylesheet" href="auth.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/css/intlTelInput.css">
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"></script>
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-box">
+            <div class="logo">
+                <div class="logo-text">Bazzar Collection</div>
+                <div class="logo-dot"></div>
+            </div>
+            <div class="step-progress">
+                <div class="step active" data-step="1">1</div>
+                <div class="step-line"></div>
+                <div class="step" data-step="2">2</div>
+                <div class="step-line"></div>
+                <div class="step" data-step="3">3</div>
+                <div class="step-line"></div>
+                <div class="step" data-step="4">4</div>
+            </div>
+            <form id="signupForm">
+                <!-- Step 1: Basic Information -->
+                <div class="step-content active" data-step="1">
+                    <h2>Basic Information</h2>
+                    <div class="input-group">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="firstName" placeholder="First Name" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="lastName" placeholder="Last Name" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="email" placeholder="Email Address" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-phone"></i>
+                        <input type="tel" id="phone" required>
+                    </div>
+                </div>
+
+                <!-- Step 2: Security -->
+                <div class="step-content" data-step="2">
+                    <h2>Security</h2>
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="password" placeholder="Password" required>
+                        <div class="password-strength">
+                            <div class="password-strength-bar"></div>
+                        </div>
+                        <div class="password-strength-text"></div>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-question-circle"></i>
+                        <select id="securityQuestion1" required>
+                            <option value="">Select Security Question 1</option>
+                            <option value="pet">What was your first pet's name?</option>
+                            <option value="school">What was the name of your first school?</option>
+                            <option value="city">In which city were you born?</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-key"></i>
+                        <input type="text" id="securityAnswer1" placeholder="Security Answer 1" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-question-circle"></i>
+                        <select id="securityQuestion2" required>
+                            <option value="">Select Security Question 2</option>
+                            <option value="mother">What is your mother's maiden name?</option>
+                            <option value="car">What was your first car?</option>
+                            <option value="food">What is your favorite food?</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-key"></i>
+                        <input type="text" id="securityAnswer2" placeholder="Security Answer 2" required>
+                    </div>
+                </div>
+
+                <!-- Step 3: Personal Details -->
+                <div class="step-content" data-step="3">
+                    <h2>Personal Details</h2>
+                    <div class="input-group">
+                        <i class="fas fa-calendar"></i>
+                        <input type="date" id="dateOfBirth" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-venus-mars"></i>
+                        <select id="gender" required>
+                            <option value="">Select Gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                            <option value="prefer-not">Prefer not to say</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-globe"></i>
+                        <input type="text" id="nationality" placeholder="Nationality" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-language"></i>
+                        <select id="language" required>
+                            <option value="">Preferred Language</option>
+                            <option value="en">English</option>
+                            <option value="af">Afrikaans</option>
+                            <option value="zu">isiZulu</option>
+                            <option value="xh">isiXhosa</option>
+                            <option value="st">Sesotho</option>
+                            <option value="tn">Setswana</option>
+                            <option value="nr">isiNdebele</option>
+                            <option value="ts">Xitsonga</option>
+                            <option value="ss">siSwati</option>
+                            <option value="ve">Tshivenda</option>
+                            <option value="nso">Sepedi</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Step 4: Address & Preferences -->
+                <div class="step-content" data-step="4">
+                    <h2>Address & Preferences</h2>
+                    <div class="input-group">
+                        <i class="fas fa-building"></i>
+                        <input type="text" id="unitNumber" placeholder="Unit/Apartment Number (Optional)">
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <input type="text" id="streetNumber" placeholder="Street Number" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-road"></i>
+                        <input type="text" id="streetName" placeholder="Street Name" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-map"></i>
+                        <select id="province" required>
+                            <option value="">Select Province</option>
+                            <option value="EC">Eastern Cape</option>
+                            <option value="FS">Free State</option>
+                            <option value="GP">Gauteng</option>
+                            <option value="KZN">KwaZulu-Natal</option>
+                            <option value="LP">Limpopo</option>
+                            <option value="MP">Mpumalanga</option>
+                            <option value="NC">Northern Cape</option>
+                            <option value="NW">North West</option>
+                            <option value="WC">Western Cape</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-city"></i>
+                        <select id="city" required disabled>
+                            <option value="">Select City</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-mail-bulk"></i>
+                        <input type="text" id="postalCode" placeholder="Postal Code" required maxlength="4" pattern="[0-9]{4}">
+                        <div class="input-hint">Enter a valid 4-digit postal code</div>
+                    </div>
+                    <div class="checkbox-group">
+                        <label>
+                            <input type="checkbox" id="newsletter" checked>
+                            Subscribe to newsletter
+                        </label>
+                    </div>
+                    <div class="checkbox-group">
+                        <label>
+                            <input type="checkbox" id="terms" required>
+                            I agree to the <a href="terms.html" target="_blank">Terms and Conditions</a>
+                        </label>
+                    </div>
+                    <div class="checkbox-group">
+                        <label>
+                            <input type="checkbox" id="privacy" required>
+                            I agree to the <a href="privacy.html" target="_blank">Privacy Policy</a>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-navigation">
+                    <button type="button" class="cyber-btn prev-btn" style="display: none;">Previous</button>
+                    <button type="button" class="cyber-btn next-btn">Next</button>
+                    <button type="submit" class="cyber-btn submit-btn" style="display: none;">Create Account</button>
+                </div>
+            </form>
+            <div class="auth-footer">
+                Already have an account? <a href="login.html">Login</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/intlTelInput.min.js"></script>
+    <script>
+        // Country data with languages
+        const countryData = {
+            "Afghanistan": {
+                languages: ["Pashto", "Dari"],
+                code: "AF"
+            },
+            "Albania": {
+                languages: ["Albanian"],
+                code: "AL"
+            },
+            "Algeria": {
+                languages: ["Arabic", "Tamazight", "French"],
+                code: "DZ"
+            },
+            "Argentina": {
+                languages: ["Spanish"],
+                code: "AR"
+            },
+            "Australia": {
+                languages: ["English"],
+                code: "AU"
+            },
+            "Austria": {
+                languages: ["German"],
+                code: "AT"
+            },
+            "Belgium": {
+                languages: ["Dutch", "French", "German"],
+                code: "BE"
+            },
+            "Brazil": {
+                languages: ["Portuguese"],
+                code: "BR"
+            },
+            "Canada": {
+                languages: ["English", "French"],
+                code: "CA"
+            },
+            "China": {
+                languages: ["Chinese", "Mandarin"],
+                code: "CN"
+            },
+            "Denmark": {
+                languages: ["Danish"],
+                code: "DK"
+            },
+            "Egypt": {
+                languages: ["Arabic"],
+                code: "EG"
+            },
+            "Finland": {
+                languages: ["Finnish", "Swedish"],
+                code: "FI"
+            },
+            "France": {
+                languages: ["French"],
+                code: "FR"
+            },
+            "Germany": {
+                languages: ["German"],
+                code: "DE"
+            },
+            "Greece": {
+                languages: ["Greek"],
+                code: "GR"
+            },
+            "India": {
+                languages: ["Hindi", "English", "Bengali", "Telugu", "Marathi", "Tamil", "Urdu"],
+                code: "IN"
+            },
+            "Indonesia": {
+                languages: ["Indonesian"],
+                code: "ID"
+            },
+            "Ireland": {
+                languages: ["English", "Irish"],
+                code: "IE"
+            },
+            "Italy": {
+                languages: ["Italian"],
+                code: "IT"
+            },
+            "Japan": {
+                languages: ["Japanese"],
+                code: "JP"
+            },
+            "Mexico": {
+                languages: ["Spanish"],
+                code: "MX"
+            },
+            "Netherlands": {
+                languages: ["Dutch"],
+                code: "NL"
+            },
+            "New Zealand": {
+                languages: ["English", "Māori"],
+                code: "NZ"
+            },
+            "Norway": {
+                languages: ["Norwegian"],
+                code: "NO"
+            },
+            "Poland": {
+                languages: ["Polish"],
+                code: "PL"
+            },
+            "Portugal": {
+                languages: ["Portuguese"],
+                code: "PT"
+            },
+            "Russia": {
+                languages: ["Russian"],
+                code: "RU"
+            },
+            "Saudi Arabia": {
+                languages: ["Arabic"],
+                code: "SA"
+            },
+            "Singapore": {
+                languages: ["English", "Malay", "Mandarin", "Tamil"],
+                code: "SG"
+            },
+            "South Africa": {
+                languages: ["Afrikaans", "English", "Zulu", "Xhosa", "Southern Sotho"],
+                code: "ZA"
+            },
+            "South Korea": {
+                languages: ["Korean"],
+                code: "KR"
+            },
+            "Spain": {
+                languages: ["Spanish", "Catalan", "Galician", "Basque"],
+                code: "ES"
+            },
+            "Sweden": {
+                languages: ["Swedish"],
+                code: "SE"
+            },
+            "Switzerland": {
+                languages: ["German", "French", "Italian", "Romansh"],
+                code: "CH"
+            },
+            "Thailand": {
+                languages: ["Thai"],
+                code: "TH"
+            },
+            "Turkey": {
+                languages: ["Turkish"],
+                code: "TR"
+            },
+            "United Arab Emirates": {
+                languages: ["Arabic", "English"],
+                code: "AE"
+            },
+            "United Kingdom": {
+                languages: ["English"],
+                code: "GB"
+            },
+            "United States": {
+                languages: ["English", "Spanish"],
+                code: "US"
+            },
+            "Vietnam": {
+                languages: ["Vietnamese"],
+                code: "VN"
+            }
+        };
+
+        // Initialize phone input with search
+        const phoneInput = window.intlTelInput(document.querySelector("#phone"), {
+            utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js",
+            separateDialCode: true,
+            allowDropdown: true,
+            autoPlaceholder: "aggressive",
+            preferredCountries: [],
+            initialCountry: "",
+            customPlaceholder: function(selectedCountryPlaceholder, selectedCountryData) {
+                return "Search country code or enter phone number";
+            }
+        });
+
+        // Multi-step form handling
+        let currentStep = 1;
+        const totalSteps = 4;
+        const form = document.getElementById('signupForm');
+        const nextBtn = document.querySelector('.next-btn');
+        const prevBtn = document.querySelector('.prev-btn');
+        const submitBtn = document.querySelector('.submit-btn');
+
+        function updateStepUI(step) {
+            // Update progress indicators
+            document.querySelectorAll('.step').forEach(s => {
+                if (parseInt(s.dataset.step) <= step) {
+                    s.classList.add('active');
+                } else {
+                    s.classList.remove('active');
+                }
+            });
+
+            // Show/hide step content
+            document.querySelectorAll('.step-content').forEach(content => {
+                content.classList.remove('active');
+                if (parseInt(content.dataset.step) === step) {
+                    content.classList.add('active');
+                }
+            });
+
+            // Update navigation buttons
+            prevBtn.style.display = step === 1 ? 'none' : 'block';
+            nextBtn.style.display = step === totalSteps ? 'none' : 'block';
+            submitBtn.style.display = step === totalSteps ? 'block' : 'none';
+        }
+
+        // Set max date for date picker to today
+        const dateInput = document.getElementById('dateOfBirth');
+        const today = new Date();
+        const dd = String(today.getDate()).padStart(2, '0');
+        const mm = String(today.getMonth() + 1).padStart(2, '0');
+        const yyyy = today.getFullYear();
+        dateInput.max = `${yyyy}-${mm}-${dd}`;
+
+        // Add step navigation through URL hash
+        function navigateToStep(stepNumber) {
+            currentStep = stepNumber;
+            updateStepUI(currentStep);
+            window.location.hash = `step${stepNumber}`;
+        }
+
+        // Handle direct navigation through URL
+        window.addEventListener('load', function() {
+            const hash = window.location.hash;
+            if (hash && hash.startsWith('#step')) {
+                const step = parseInt(hash.replace('#step', ''));
+                if (step >= 1 && step <= totalSteps) {
+                    navigateToStep(step);
+                }
+            }
+        });
+
+        // Update navigation buttons to use navigateToStep
+        nextBtn.addEventListener('click', () => {
+            if (currentStep < totalSteps) {
+                navigateToStep(currentStep + 1);
+            }
+        });
+
+        prevBtn.addEventListener('click', () => {
+            if (currentStep > 1) {
+                navigateToStep(currentStep - 1);
+            }
+        });
+
+        // Password visibility toggle
+        document.querySelectorAll('.password-toggle').forEach(toggle => {
+            toggle.addEventListener('click', function() {
+                const input = this.previousElementSibling;
+                const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+                input.setAttribute('type', type);
+                this.classList.toggle('fa-eye');
+                this.classList.toggle('fa-eye-slash');
+            });
+        });
+
+        // Password validation and strength meter
+        const passwordInput = document.getElementById('password');
+        const confirmPasswordInput = document.getElementById('confirmPassword');
+        const strengthBar = document.querySelector('.password-strength-bar');
+        const strengthText = document.querySelector('.password-strength-text');
+        let passwordsMatch = false;
+
+        // Password validation rules
+        const passwordRules = {
+            minLength: { test: (pwd) => pwd.length >= 8, message: 'At least 8 characters' },
+            uppercase: { test: (pwd) => /[A-Z]/.test(pwd), message: 'At least 1 uppercase letter' },
+            lowercase: { test: (pwd) => /[a-z]/.test(pwd), message: 'At least 1 lowercase letter' },
+            number: { test: (pwd) => /[0-9]/.test(pwd), message: 'At least 1 number' },
+            special: { test: (pwd) => /[^A-Za-z0-9]/.test(pwd), message: 'At least 1 special character' }
+        };
+
+        // Create password requirements list
+        const passwordRequirements = document.createElement('div');
+        passwordRequirements.className = 'password-requirements';
+        passwordRequirements.innerHTML = `
+            <div class="requirements-title">Password must contain:</div>
+            ${Object.entries(passwordRules).map(([key, rule]) => `
+                <div class="requirement" data-requirement="${key}">
+                    <i class="fas fa-times-circle"></i>
+                    <span>${rule.message}</span>
+                </div>
+            `).join('')}
+        `;
+        passwordInput.parentNode.appendChild(passwordRequirements);
+
+        // Password validation and strength check
+        function validatePassword() {
+            const password = passwordInput.value;
+            let strength = 0;
+            let validRequirements = 0;
+
+            // Update requirements UI
+            Object.entries(passwordRules).forEach(([key, rule]) => {
+                const reqElement = passwordRequirements.querySelector(`[data-requirement="${key}"]`);
+                const icon = reqElement.querySelector('i');
+                
+                if (rule.test(password)) {
+                    reqElement.classList.add('valid');
+                    icon.className = 'fas fa-check-circle';
+                    validRequirements++;
+                    strength++;
+                } else {
+                    reqElement.classList.remove('valid');
+                    icon.className = 'fas fa-times-circle';
+                }
+            });
+
+            // Update strength indicator
+            const strengthPercentage = (strength / Object.keys(passwordRules).length) * 100;
+            const strengthClass = strength <= 2 ? 'weak' : strength <= 4 ? 'medium' : 'strong';
+            
+            document.querySelector('.password-strength').className = `password-strength ${strengthClass}`;
+            strengthBar.style.width = `${strengthPercentage}%`;
+            
+            strengthText.textContent = strength === 0 ? '' :
+                strength <= 2 ? 'Weak password' :
+                strength <= 4 ? 'Medium strength password' :
+                'Strong password';
+
+            validatePasswords();
+        }
+
+        // Password matching validation
+        function validatePasswords() {
+            const password = passwordInput.value;
+            const confirmPassword = confirmPasswordInput.value;
+            
+            if (confirmPassword) {
+                const allRulesValid = Object.values(passwordRules).every(rule => rule.test(password));
+                
+                if (password === confirmPassword && allRulesValid) {
+                    confirmPasswordInput.classList.remove('invalid');
+                    confirmPasswordInput.classList.add('valid');
+                    passwordError.textContent = '';
+                    passwordError.className = 'password-error success';
+                    passwordsMatch = true;
+                } else {
+                    confirmPasswordInput.classList.remove('valid');
+                    confirmPasswordInput.classList.add('invalid');
+                    passwordError.textContent = !allRulesValid ? 'Password does not meet requirements' : 'Passwords do not match';
+                    passwordError.className = 'password-error error';
+                    passwordsMatch = false;
+                }
+            }
+        }
+
+        passwordInput.addEventListener('input', validatePassword);
+        confirmPasswordInput.addEventListener('input', validatePasswords);
+
+        // Form submission
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Add your form submission logic here
+            console.log('Form submitted!');
+        });
+
+        // Nationality input handling
+        const nationalityInput = document.getElementById('nationality');
+        const languageSelect = document.getElementById('language');
+
+        // Create dropdown container
+        const dropdownContainer = document.createElement('div');
+        dropdownContainer.className = 'nationality-dropdown';
+        nationalityInput.parentNode.appendChild(dropdownContainer);
+
+        nationalityInput.addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const matches = Object.keys(countryData).filter(country => 
+                country.toLowerCase().includes(searchTerm)
+            );
+
+            if (searchTerm.length > 0 && matches.length > 0) {
+                dropdownContainer.innerHTML = matches.map(country => `
+                    <div class="nationality-option" data-country="${country}">
+                        <div>${country}</div>
+                        <div class="languages">Languages: ${countryData[country].languages.join(', ')}</div>
+                    </div>
+                `).join('');
+                dropdownContainer.classList.add('active');
+            } else {
+                dropdownContainer.classList.remove('active');
+            }
+        });
+
+        // Handle nationality selection
+        dropdownContainer.addEventListener('click', function(e) {
+            const option = e.target.closest('.nationality-option');
+            if (option) {
+                const country = option.dataset.country;
+                nationalityInput.value = country;
+                
+                // Update language options
+                languageSelect.innerHTML = `<option value="">Preferred Language</option>` +
+                    countryData[country].languages.map(lang => 
+                        `<option value="${lang.toLowerCase()}">${lang}</option>`
+                    ).join('');
+                
+                dropdownContainer.classList.remove('active');
+            }
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.input-group')) {
+                dropdownContainer.classList.remove('active');
+            }
+        });
+
+        // Initialize intl-tel-input with search capability
+        document.querySelector('.iti__search-input')?.addEventListener('input', function() {
+            this.style.color = 'black';
+        });
+
+        // Initialize Google Places Autocomplete
+        function initPlacesAutocomplete() {
+            const addressInput = document.getElementById('streetAddress');
+            const addressFeedback = document.querySelector('.address-feedback');
+            
+            // Set South African bounds
+            const saBounds = {
+                north: -22.1250300,
+                south: -34.8351800,
+                west: 16.4700000,
+                east: 32.8900000
+            };
+            
+            const options = {
+                componentRestrictions: { country: 'za' },
+                bounds: saBounds,
+                fields: ['address_components', 'formatted_address', 'geometry'],
+                strictBounds: true,
+                types: ['address']
+            };
+
+            const autocomplete = new google.maps.places.Autocomplete(addressInput, options);
+
+            // Handle place selection
+            autocomplete.addListener('place_changed', function() {
+                const place = autocomplete.getPlace();
+                
+                if (!place.address_components) {
+                    showAddressError('Please select an address from the dropdown');
+                    return;
+                }
+
+                // Reset fields
+                resetAddressFields();
+
+                // Track required components
+                let hasStreetNumber = false;
+                let hasRoute = false;
+                let hasLocality = false;
+                let hasPostalCode = false;
+
+                // Process address components
+                place.address_components.forEach(component => {
+                    const type = component.types[0];
+                    
+                    switch(type) {
+                        case 'street_number':
+                            hasStreetNumber = true;
+                            break;
+                        case 'route':
+                            hasRoute = true;
+                            break;
+                        case 'sublocality_level_1':
+                        case 'locality':
+                            document.getElementById('city').value = component.long_name;
+                            hasLocality = true;
+                            break;
+                        case 'administrative_area_level_1':
+                            document.getElementById('state').value = component.long_name;
+                            break;
+                        case 'country':
+                            document.getElementById('country').value = component.long_name;
+                            break;
+                        case 'postal_code':
+                            document.getElementById('postalCode').value = component.long_name;
+                            hasPostalCode = true;
+                            break;
+                    }
+                });
+
+                // Validate complete address
+                if (hasStreetNumber && hasRoute && hasLocality && hasPostalCode) {
+                    addressInput.classList.add('valid');
+                    addressInput.classList.remove('invalid');
+                    showAddressSuccess('Valid address');
+                } else {
+                    addressInput.classList.add('invalid');
+                    addressInput.classList.remove('valid');
+                    showAddressError('Please enter a complete street address');
+                }
+
+                // Set formatted address
+                addressInput.value = place.formatted_address;
+            });
+
+            // Handle manual input
+            addressInput.addEventListener('input', function() {
+                if (!this.value) {
+                    showAddressError('Address is required');
+                    this.classList.add('invalid');
+                    this.classList.remove('valid');
+                }
+            });
+
+            function showAddressError(message) {
+                addressFeedback.textContent = message;
+                addressFeedback.className = 'address-feedback error';
+            }
+
+            function showAddressSuccess(message) {
+                addressFeedback.textContent = message;
+                addressFeedback.className = 'address-feedback success';
+            }
+
+            function resetAddressFields() {
+                ['city', 'state', 'country', 'postalCode'].forEach(field => {
+                    const element = document.getElementById(field);
+                    element.value = '';
+                    element.classList.remove('valid', 'invalid');
+                });
+            }
+        }
+
+        // Initialize Places Autocomplete when the page loads
+        window.addEventListener('load', initPlacesAutocomplete);
+
+        // Add these styles to your CSS
+        const style = document.createElement('style');
+        style.textContent = `
+            .password-requirements {
+                margin-top: 10px;
+                font-size: 12px;
+                color: var(--grey-light);
+            }
+
+            .requirements-title {
+                margin-bottom: 5px;
+                color: var(--silver);
+            }
+
+            .requirement {
+                display: flex;
+                align-items: center;
+                gap: 5px;
+                margin: 3px 0;
+                transition: color 0.3s ease;
+            }
+
+            .requirement.valid {
+                color: var(--success-color);
+            }
+
+            .requirement i {
+                font-size: 14px;
+            }
+
+            .requirement.valid i {
+                color: var(--success-color);
+            }
+
+            .input-group input.valid {
+                border-color: var(--success-color);
+                box-shadow: 0 0 5px rgba(0, 200, 81, 0.2);
+            }
+
+            .input-group input.invalid {
+                border-color: var(--error-color);
+                box-shadow: 0 0 5px rgba(255, 68, 68, 0.2);
+            }
+
+            .password-error,
+            .address-validation {
+                font-size: 12px;
+                margin-top: 5px;
+                transition: all 0.3s ease;
+            }
+
+            .password-error.error,
+            .address-validation.error {
+                color: var(--error-color);
+            }
+
+            .password-error.success,
+            .address-validation.success {
+                color: var(--success-color);
+            }
+
+            .iti__country-list {
+                background-color: var(--grey-dark);
+                border: 1px solid var(--grey-medium);
+                max-height: 200px;
+            }
+
+            .iti__country {
+                padding: 8px 10px;
+                transition: background-color 0.3s ease;
+            }
+
+            .iti__country:hover {
+                background-color: rgba(255, 255, 255, 0.1);
+            }
+
+            .iti__country.iti__active {
+                background-color: rgba(255, 215, 0, 0.2);
+            }
+
+            .iti__search-input {
+                background-color: var(--grey-dark);
+                border: 1px solid var(--grey-medium);
+                color: black;
+                padding: 8px;
+                margin: 5px;
+            }
+        `;
+        document.head.appendChild(style);
+
+        // South African cities by province
+        const saCities = {
+            EC: [
+                "Bhisho", "East London", "Gqeberha (Port Elizabeth)", "Makhanda (Grahamstown)", 
+                "Mthatha", "Queenstown", "King William's Town", "Uitenhage", "Aliwal North",
+                "Butterworth", "Cradock", "Fort Beaufort", "Graaff-Reinet", "Humansdorp",
+                "Jeffreys Bay", "Lady Grey", "Port Alfred", "Somerset East", "Stutterheim",
+                "Willowmore", "Aberdeen", "Adelaide", "Alice", "Bedford", "Burgersdorp",
+                "Cathcart", "Cofimvaba", "Despatch", "Elliot", "Engcobo", "Hofmeyr",
+                "Joubertina", "Kirkwood", "Komga", "Lady Frere", "Maclear", "Middelburg",
+                "Mount Fletcher", "Mount Frere", "Peddie", "Port St Johns", "Steynsburg",
+                "Sterkstroom", "Tarkastad", "Tsolo", "Whittlesea"
+            ],
+            FS: [
+                "Bloemfontein", "Welkom", "Bethlehem", "Kroonstad", "Sasolburg", 
+                "Parys", "Harrismith", "Virginia", "Botshabelo", "Thaba Nchu",
+                "Phuthaditjhaba", "Odendaalsrus", "Reitz", "Senekal", "Ficksburg",
+                "Ladybrand", "Heilbron", "Frankfort", "Viljoenskroon", "Bothaville",
+                "Brandfort", "Bultfontein", "Clocolan", "Cornelia", "Dealesville",
+                "Deneysville", "Dewetsdorp", "Edenburg", "Excelsior", "Fauresmith",
+                "Fouriesburg", "Hennenman", "Hertzogville", "Hoopstad", "Jacobsdal",
+                "Jagersfontein", "Kestell", "Koffiefontein", "Lindley", "Marquard",
+                "Memel", "Paul Roux", "Petrus Steyn", "Philippolis", "Reddersburg",
+                "Rosendal", "Smithfield", "Springfontein", "Steynsrus", "Trompsburg",
+                "Tweespruit", "Ventersburg", "Verkeerdevlei", "Vredefort", "Warden",
+                "Wesselsbron", "Winburg", "Zastron"
+            ],
+            GP: [
+                "Johannesburg", "Pretoria", "Soweto", "Centurion", "Sandton", 
+                "Midrand", "Randburg", "Roodepoort", "Kempton Park", "Boksburg",
+                "Benoni", "Springs", "Germiston", "Alberton", "Edenvale", "Krugersdorp",
+                "Carletonville", "Randfontein", "Vanderbijlpark", "Vereeniging",
+                "Alexandra", "Bedfordview", "Brakpan", "Bronkhorstspruit", "Cullinan",
+                "Daveyton", "Devon", "Duduza", "Ekangala", "Heidelberg", "Heilbron",
+                "Irene", "Isando", "Katlehong", "Khutsong", "Kromdraai", "Lenasia",
+                "Magaliesburg", "Mamelodi", "Meyerton", "Modderfontein", "Muldersdrift",
+                "Nigel", "Olifantsfontein", "Reiger Park", "Sebokeng", "Soshanguve",
+                "Springs", "Tembisa", "Thokoza", "Tsakane", "Vosloorus", "Wadeville",
+                "Westonaria", "Zwartkops"
+            ],
+            KZN: [
+                "Durban", "Pietermaritzburg", "Newcastle", "Richards Bay", "Ladysmith",
+                "Port Shepstone", "Ballito", "Umhlanga", "Amanzimtoti", "Dundee",
+                "Empangeni", "Eshowe", "Estcourt", "Greytown", "Hibberdene", "Hillcrest",
+                "Howick", "Ifafa Beach", "Illovo Beach", "Inanda", "Isipingo", "Karridene",
+                "Kloof", "Kokstad", "KwaMashu", "La Lucia", "Margate", "Melmoth",
+                "Mooi River", "Mtunzini", "New Germany", "Nongoma", "Paulpietersburg",
+                "Pennington", "Phoenix", "Pinetown", "Port Edward", "Queensburgh",
+                "Richmond", "Scottburgh", "Shelly Beach", "Stanger", "Tongaat", "Ulundi",
+                "Umdloti", "Umkomaas", "Umzinto", "Underberg", "Utrecht", "Verulam",
+                "Vryheid", "Warner Beach", "Westville"
+            ],
+            LP: [
+                "Polokwane", "Tzaneen", "Mokopane", "Lebowakgomo", "Thohoyandou",
+                "Louis Trichardt", "Giyani", "Musina", "Bela-Bela", "Burgersfort",
+                "Dendron", "Duiwelskloof", "Elim", "Ga-Kgapane", "Groblersdal",
+                "Hoedspruit", "Jane Furse", "Lephalale", "Letsitele", "Lydenburg",
+                "Malamulele", "Marble Hall", "Messina", "Modjadjiskloof", "Mogwadi",
+                "Morebeng", "Naboomspruit", "Nkowankowa", "Phalaborwa", "Roedtan",
+                "Sekgopo", "Senwabarwana", "Seshego", "Thabazimbi", "Vaalwater",
+                "Vivo", "Zebetiela"
+            ],
+            MP: [
+                "Nelspruit", "Witbank", "Secunda", "Middelburg", "Ermelo",
+                "Barberton", "Standerton", "Hazyview", "Amsterdam", "Balfour",
+                "Belfast", "Bethal", "Carolina", "Delmas", "Dullstroom", "Graskop",
+                "Hendrina", "Komatipoort", "Kriel", "Lydenburg", "Machadodorp",
+                "Malelane", "Marble Hall", "Ogies", "Piet Retief", "Sabie",
+                "Skukuza", "Trichardt", "Volksrust", "Waterval Boven", "White River"
+            ],
+            NC: [
+                "Kimberley", "Upington", "Kuruman", "De Aar", "Springbok",
+                "Calvinia", "Port Nolloth", "Victoria West", "Alexander Bay",
+                "Barkly West", "Britstown", "Carnarvon", "Colesberg", "Douglas",
+                "Fraserburg", "Griekwastad", "Groblershoop", "Hanover", "Hartswater",
+                "Hopetown", "Jan Kempdorp", "Kakamas", "Kathu", "Keimoes", "Kenhardt",
+                "Lime Acres", "Loxton", "Noupoort", "Orania", "Pofadder", "Postmasburg",
+                "Prieska", "Richmond", "Strydenburg", "Sutherland", "Vanderkloof",
+                "Vosburg", "Warrenton", "Williston"
+            ],
+            NW: [
+                "Mahikeng", "Rustenburg", "Potchefstroom", "Klerksdorp", "Brits",
+                "Lichtenburg", "Zeerust", "Vryburg", "Bloemhof", "Christiana",
+                "Coligny", "Delareyville", "Derby", "Ganyesa", "Groot Marico",
+                "Hartbeesfontein", "Koster", "Kroondal", "Leeudoringstad", "Mareetsane",
+                "Mogwase", "Orkney", "Ottosdal", "Phokeng", "Sannieshof", "Schweizer-Reneke",
+                "Stilfontein", "Swartruggens", "Taung", "Ventersdorp", "Wolmaransstad"
+            ],
+            WC: [
+                "Cape Town", "Stellenbosch", "Paarl", "Worcester", "George",
+                "Mossel Bay", "Hermanus", "Knysna", "Beaufort West", "Bellville",
+                "Betty's Bay", "Bredasdorp", "Caledon", "Calitzdorp", "Ceres",
+                "Citrusdal", "Clanwilliam", "Darling", "De Doorns", "Durbanville",
+                "Fish Hoek", "Franschhoek", "Gansbaai", "Goodwood", "Gordon's Bay",
+                "Grabouw", "Heidelberg", "Hopefield", "Khayelitsha", "Kuils River",
+                "Ladismith", "Laingsburg", "Lamberts Bay", "Langebaan", "Malmesbury",
+                "Mitchells Plain", "Montagu", "Muizenberg", "Murraysburg", "Napier",
+                "Oudtshoorn", "Parow", "Piketberg", "Plettenberg Bay", "Prince Albert",
+                "Pringle Bay", "Riversdale", "Robertson", "Rondebosch", "Saldanha",
+                "Simon's Town", "Somerset West", "St Helena Bay", "Strand", "Swellendam",
+                "Table View", "Touws River", "Tulbagh", "Uniondale", "Van Rhynsdorp",
+                "Vredenburg", "Vredendal", "Wellington", "Wilderness", "Wolseley",
+                "Wynberg"
+            ]
+        };
+
+        // Update cities when province changes
+        document.getElementById('province').addEventListener('change', function() {
+            const citySelect = document.getElementById('city');
+            const selectedProvince = this.value;
+            
+            // Clear current cities
+            citySelect.innerHTML = '<option value="">Select City</option>';
+            
+            if (selectedProvince) {
+                // Add cities for selected province
+                saCities[selectedProvince].forEach(city => {
+                    const option = document.createElement('option');
+                    option.value = city;
+                    option.textContent = city;
+                    citySelect.appendChild(option);
+                });
+                citySelect.disabled = false;
+            } else {
+                citySelect.disabled = true;
+            }
+        });
+
+        // Postal code validation
+        const postalCodeInput = document.getElementById('postalCode');
+        const postalCodeHint = postalCodeInput.nextElementSibling;
+
+        postalCodeInput.addEventListener('input', function() {
+            this.value = this.value.replace(/\D/g, ''); // Remove non-digits
+            
+            if (this.value.length === 4) {
+                if (/^[0-9]{4}$/.test(this.value)) {
+                    this.classList.add('valid');
+                    this.classList.remove('invalid');
+                    postalCodeHint.style.color = 'var(--success-color)';
+                    postalCodeHint.textContent = 'Valid postal code';
+                } else {
+                    this.classList.add('invalid');
+                    this.classList.remove('valid');
+                    postalCodeHint.style.color = 'var(--error-color)';
+                    postalCodeHint.textContent = 'Invalid postal code format';
+                }
+            } else {
+                this.classList.remove('valid', 'invalid');
+                postalCodeHint.style.color = 'var(--grey-light)';
+                postalCodeHint.textContent = 'Enter a valid 4-digit postal code';
+            }
+        });
+
+        // Street number validation
+        const streetNumberInput = document.getElementById('streetNumber');
+        streetNumberInput.addEventListener('input', function() {
+            if (this.value.trim()) {
+                this.classList.add('valid');
+                this.classList.remove('invalid');
+            } else {
+                this.classList.add('invalid');
+                this.classList.remove('valid');
+            }
+        });
+
+        // Street name validation
+        const streetNameInput = document.getElementById('streetName');
+        streetNameInput.addEventListener('input', function() {
+            if (this.value.trim().length >= 2) {
+                this.classList.add('valid');
+                this.classList.remove('invalid');
+            } else {
+                this.classList.add('invalid');
+                this.classList.remove('valid');
+            }
+        });
+
+        // Add validation to step navigation
+        function validateAddressFields() {
+            const requiredFields = ['streetNumber', 'streetName', 'province', 'city', 'postalCode'];
+            let isValid = true;
+
+            requiredFields.forEach(fieldId => {
+                const field = document.getElementById(fieldId);
+                if (!field.value.trim()) {
+                    field.classList.add('invalid');
+                    isValid = false;
+                }
+            });
+
+            return isValid;
+        }
+
+        // Update step validation
+        const originalValidateStep = validateStep;
+        validateStep = function(step) {
+            if (step === 4) {
+                if (!validateAddressFields()) {
+                    alert('Please fill in all required address fields correctly');
+                    return false;
+                }
+            }
+            return originalValidateStep(step);
+        }
+    </script>
+</body>
+</html> 

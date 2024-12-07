@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Bazzar Collection</title>
+    <link rel="stylesheet" href="auth.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-box">
+            <div class="logo">
+                <div class="logo-text">Bazzar Collection</div>
+                <div class="logo-dot"></div>
+            </div>
+            <h2>Welcome Back</h2>
+            <div class="message-box"></div>
+            <form id="loginForm">
+                <div class="input-group">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="email" placeholder="Email Address" required>
+                    <div class="input-error"></div>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="password" placeholder="Password" required>
+                    <i class="fas fa-eye password-toggle"></i>
+                    <div class="input-error"></div>
+                </div>
+                <div class="remember-forgot">
+                    <label>
+                        <input type="checkbox" id="remember">
+                        Remember me
+                    </label>
+                    <a href="#" class="forgot-password" id="forgotPasswordBtn">Forgot Password?</a>
+                </div>
+                <div id="loginAttempts" class="attempts-warning" style="display: none;">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span></span>
+                </div>
+                <button type="submit" class="cyber-btn" id="loginBtn">
+                    <span class="btn-text">Login</span>
+                    <div class="btn-loader" style="display: none;">
+                        <i class="fas fa-spinner fa-spin"></i>
+                    </div>
+                </button>
+            </form>
+            <div class="auth-footer">
+                Don't have an account? <a href="signup.html">Sign Up</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Password Reset Modal -->
+    <div id="resetModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Reset Password</h3>
+            <form id="resetForm">
+                <div class="input-group">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="resetEmail" placeholder="Enter your email" required>
+                </div>
+                <button type="submit" class="cyber-btn">Send Reset Link</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Security Configuration
+        const MAX_LOGIN_ATTEMPTS = 3;
+        const LOCKOUT_DURATION = 15 * 60 * 1000; // 15 minutes in milliseconds
+        const SESSION_DURATION = 30 * 60 * 1000; // 30 minutes in milliseconds
+
+        // UI Elements
+        const loginForm = document.getElementById('loginForm');
+        const messageBox = document.querySelector('.message-box');
+        const loginBtn = document.getElementById('loginBtn');
+        const btnText = loginBtn.querySelector('.btn-text');
+        const btnLoader = loginBtn.querySelector('.btn-loader');
+        const attemptsWarning = document.getElementById('loginAttempts');
+        const resetModal = document.getElementById('resetModal');
+
+        // Session Management
+        function checkSession() {
+            const session = JSON.parse(localStorage.getItem('session') || '{}');
+            if (session.isLoggedIn && session.expiresAt > Date.now()) {
+                window.location.href = '../index.html';
+            } else if (session.isLoggedIn) {
+                // Session expired
+                localStorage.removeItem('session');
+                showMessage('Session expired. Please login again.', 'warning');
+            }
+        }
+
+        function createSession(email) {
+            const session = {
+                isLoggedIn: true,
+                email: email,
+                expiresAt: Date.now() + SESSION_DURATION,
+                lastActivity: Date.now()
+            };
+            localStorage.setItem('session', JSON.stringify(session));
+        }
+
+        // Login Attempt Management
+        function getLoginAttempts() {
+            const attempts = JSON.parse(localStorage.getItem('loginAttempts') || '{}');
+            if (attempts.lockUntil && attempts.lockUntil < Date.now()) {
+                // Lock period expired, reset attempts
+                localStorage.removeItem('loginAttempts');
+                return { count: 0, lockUntil: null };
+            }
+            return attempts;
+        }
+
+        function updateLoginAttempts(success) {
+            let attempts = getLoginAttempts();
+            if (success) {
+                localStorage.removeItem('loginAttempts');
+                return true;
+            }
+
+            attempts.count = (attempts.count || 0) + 1;
+            if (attempts.count >= MAX_LOGIN_ATTEMPTS) {
+                attempts.lockUntil = Date.now() + LOCKOUT_DURATION;
+                showMessage(`Account locked for 15 minutes due to too many failed attempts.`, 'error');
+            } else {
+                const remaining = MAX_LOGIN_ATTEMPTS - attempts.count;
+                attemptsWarning.innerHTML = `<i class="fas fa-exclamation-triangle"></i> ${remaining} login attempts remaining`;
+                attemptsWarning.style.display = 'block';
+            }
+            localStorage.setItem('loginAttempts', JSON.stringify(attempts));
+            return attempts.count < MAX_LOGIN_ATTEMPTS;
+        }
+
+        // UI Helpers
+        function showMessage(message, type = 'error') {
+            messageBox.className = `message-box ${type}`;
+            messageBox.innerHTML = `<i class="fas fa-${type === 'error' ? 'times-circle' : type === 'success' ? 'check-circle' : 'exclamation-triangle'}"></i> ${message}`;
+            messageBox.style.display = 'block';
+        }
+
+        function setLoading(isLoading) {
+            loginBtn.disabled = isLoading;
+            btnText.style.display = isLoading ? 'none' : 'block';
+            btnLoader.style.display = isLoading ? 'block' : 'none';
+        }
+
+        // Event Handlers
+        loginForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const attempts = getLoginAttempts();
+            if (attempts.lockUntil && attempts.lockUntil > Date.now()) {
+                const minutesLeft = Math.ceil((attempts.lockUntil - Date.now()) / 60000);
+                showMessage(`Account is locked. Please try again in ${minutesLeft} minutes.`, 'error');
+                return;
+            }
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const remember = document.getElementById('remember').checked;
+
+            setLoading(true);
+
+            try {
+                // Simulate API call delay
+                await new Promise(resolve => setTimeout(resolve, 1500));
+
+                // Here you would typically validate against your backend
+                // For demo, we'll accept any email/password combination
+                if (email && password) {
+                    if (updateLoginAttempts(true)) {
+                        createSession(email);
+                        if (remember) {
+                            localStorage.setItem('rememberedEmail', email);
+                        } else {
+                            localStorage.removeItem('rememberedEmail');
+                        }
+                        window.location.href = '../index.html';
+                    }
+                } else {
+                    throw new Error('Invalid credentials');
+                }
+            } catch (error) {
+                if (!updateLoginAttempts(false)) {
+                    return;
+                }
+                showMessage(error.message);
+            } finally {
+                setLoading(false);
+            }
+        });
+
+        // Password Reset Modal
+        document.getElementById('forgotPasswordBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            resetModal.style.display = 'block';
+        });
+
+        document.querySelector('.close').addEventListener('click', function() {
+            resetModal.style.display = 'none';
+        });
+
+        window.addEventListener('click', function(e) {
+            if (e.target === resetModal) {
+                resetModal.style.display = 'none';
+            }
+        });
+
+        document.getElementById('resetForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const email = document.getElementById('resetEmail').value;
+            
+            // Simulate password reset email
+            showMessage('Password reset link sent to your email.', 'success');
+            resetModal.style.display = 'none';
+        });
+
+        // Password Toggle
+        document.querySelector('.password-toggle').addEventListener('click', function() {
+            const input = this.previousElementSibling;
+            const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+            input.setAttribute('type', type);
+            this.classList.toggle('fa-eye');
+            this.classList.toggle('fa-eye-slash');
+        });
+
+        // Auto-fill remembered email
+        const rememberedEmail = localStorage.getItem('rememberedEmail');
+        if (rememberedEmail) {
+            document.getElementById('email').value = rememberedEmail;
+            document.getElementById('remember').checked = true;
+        }
+
+        // Initialize
+        checkSession();
+    </script>
+</body>
+</html> 
